@@ -1,0 +1,98 @@
+1.寝室网络anaconda最开始加载不出网页，然后需要清华镜像，应该是网络流量太慢无法识别，
+在实验室之后就可以使用，是因为anaconda下载python3.7或2.7需要从国外去下载配置，所以很慢，且容易出错，因此我们需要配置国内的镜像源之后安装新的python环境就很快了代码：
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/  ##增加默认镜像源
+conda config --set show_channel_urls yes
+又
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+conda config --set show_channel_urls yes
+conda create --name dyk python=3.7 ##创建环境
+conda activate dyk  ##激活
+又一解决方法：
+首先删除源，换回原源：conda config --remove-key channels
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --set show_channel_urls yes
+
+我已经搭建的镜像源，就是删除默认的镜像源，并且增加新的默认的镜像源
+# To activate this environment, use:
+# > activate python27
+#
+# To deactivate an active environment, use:
+# > deactivate
+#
+# * for power-users using bash, you must source
+
+2.UnsatisfiableError: The following specifications were found to be in conflict:   - pip ==20.2.3 -> python >=3   - python 2.7*
+在python2.7版本下不能下载过高的pip版本
+解决：更新至pip20.0.2，而不是最新版本，最新版本他会要求你下载python3.7，更新后发现20.0.2不支持2.7版本了，所以只能使用老的pip版本。
+出现的是不能解码的问题UnicodeDecodeError: 'ascii' codec can't decode byte 0xf2 in position 7: 
+解决：此时需要http://www.bubuko.com/infodetail-3034113.html在这里教程。
+简单来说进入你的pyhton目录下的Lib\mimetypes.py 打开它。进入你的pyhton目录下的Lib\mimetypes.py 打开它。if sys.getdefaultencoding() != ‘gbk‘:
+    reload(sys)
+    sys.setdefaultencoding(‘gbk‘)
+
+3.出现 Failed building wheel for brotli
+解决：第一次出现这个时，他要求我安装VC（Microsoft Visual C++ Compiler for Python 2.7），安装之后确实成功了，此时我已经安装了VC for python2.7，但是仍然报错，查找资料说其实很简单:
+到这个网址下载whl文件,带路径安装
+Unofficial Windows Binaries for Python Extension Packages
+网址为http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml
+如果有这么多，其中python有C写的，还有java写的， C的叫CPython, Java的叫JPython，CP27就是指CPython 2.7。经常安装三方库的时候，就会有支持版本的提示。
+Brotli‑1.0.7‑pp36‑pypy36_pp73‑win32.whl
+Brotli‑1.0.7‑cp35‑cp35m‑win_amd64.whl
+Brotli‑1.0.7‑cp35‑cp35m‑win32.whl
+Brotli‑1.0.7‑cp34‑cp34m‑win_amd64.whl
+Brotli‑1.0.7‑cp34‑cp34m‑win32.whl
+Brotli‑1.0.7‑cp27‑cp27m‑win_amd64.whl
+Brotli‑1.0.7‑cp27‑cp27m‑win32.whl
+放到指定地方之后（我放在了pypackage），利用下载文件完成安装
+使用指令：pip install C:\Users\Administrator\Downloads\TA_Lib-0.4.17-cp35-cp35m-win_amd64.whl -i https://pypi.tuna.tsinghua.edu.cn/simple
+其中.whl文件应该是类似于驱动的文件（wheel是车轮的意思），因为我一开始Failed building wheel for brotli，所以需要专门下载一个文件构造驱动，而我在pip install D:\pypackage\Brotli-1.0.7-cp27-cp27m-win_amd64.whl -i https://pypi.mirrors.ustc.edu.cn/simple/，到后面这个网址寻找这个包，利用whl进行安装就行了
+
+4.
+python编译错误记录
+1）在使用pycharm通过清华镜像下载时，容易出现中途间断，重新下载就是，可能是网络连接不稳定
+2）如果某一个加载错误，整个结束，但是重新下载后，之前下载的会检测到，只安装没有安装的
+
+5.MongoDB
+网上安装，然后使用师兄的可视化界面
+采用网页浏览时，在输入http://localhost:27017，需要在命令行点击回车才行
+启动mongoDB需要以管理员身份启动CMD net start mongoDB 输入 net stop mongodb 关闭服务
+在services.msc
+
+6.出现 Could not find a version that satisfies the requirement brotli==1.0.7 (from versions: )
+No matching distribution found for brotli==1.0.7
+解决：可能是下载镜像源没有这个文件，因此需要换一个指定镜像源
+pip install Brotli==1.0.7 -i https://pipy.tuna.tsinghua.edu.cn/simple
+新版ubuntu要求使用https源，要注意。
+清华：https://pypi.tuna.tsinghua.edu.cn/simple
+阿里云：http://mirrors.aliyun.com/pypi/simple/
+中国科技大学 https://pypi.mirrors.ustc.edu.cn/simple/
+华中理工大学：http://pypi.hustunique.com/
+山东理工大学：http://pypi.sdutlinux.org/
+豆瓣：http://pypi.douban.com/simple/
+临时使用：
+可以在使用pip的时候加参数-i https://pypi.tuna.tsinghua.edu.cn/simple
+例如：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pyspider，这样就会从清华这边的镜像去安装pyspider库
+
+7.git的安装
+在运行人物描述的程序时pycharm一直提醒找不到git文件，需要下载安装。
+
+8.调试程序时出现了invalid syntax', nltk\\nltk\\probability.py', 333, 51, '            print("%*s" % (width, samples[i]), end=" ")\n'))
+invalid syntax是指无法识别有错误的符号，可能是中文符号的出现
+解决方法：一般情况下可能是下载的包版本过高，不兼容python2.7，需要换一个更低的版本
+
+9. with open(r"D:\study\2020\cnn_reporterlist.txt", 'r') as f:
+with open -r 文件是打开已有文件读取，使用这个命令时需要自己先在文件夹中创建一个空文档，他不会自己创建
+解决：这里由于这个指令本身的限制，学长给的代码确实。。只能自己改，以后记得用能够自己创建的指令，需要用代码自己写。。。如果使用with open -w则写入文件，没有则创建
+通常-r是我们已经有了该文件，用于作为输入
+
+10.open函数能自动创建新文件
+解决：open open(“test.txt”,w),直接打开一个文件,如果文件不存在则创建文件
+而with 
+
+11.python断点问题
+断点（break point）是指在代码中指定位置，当程序运行到此位置时变中断下来，并让开发者可查看此时各变量的值。因断点中断的程序并没有结束，可以选择继续执行。
+1）选择 debug，程序开始运行。2）选择“resume program”，程序就会继续执行，直到遇到下一个断点
+resume program在debug左边绿色标签

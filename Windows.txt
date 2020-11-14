@@ -1,0 +1,2 @@
+1.运行里面搜索services.msc可以查看所有服务
+2.windows命令行进入文件（1）cd D:\Mongodb\Server\3.4\bin （2）D:

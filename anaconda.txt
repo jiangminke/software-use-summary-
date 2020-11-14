@@ -1,0 +1,2 @@
+1.使用anaconda已经创建的编译器时能够用到在以前项目里面安装的包，说明之前使用pip安装包的时候，实在anaconda创建的python环境里面安装的，可以直接用，一次下载，永久使用
+2.安装包命令：pip install pymongo -i https://pypi.tuna.tsinghua.edu.cn/simple

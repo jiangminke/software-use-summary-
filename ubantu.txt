@@ -1,0 +1,31 @@
+1.什么事ubantu
+1）Ubuntu是Linux的一个发行版本，baiLinux有许多发行版本，比如duDebian，center，redhat等都是比较流行的，zhi要说Linux和Ubuntu的关系，dao那就好像是安卓和miui，flyme，氢os的关系差不多。他们的关系好比linux是人类（虚拟概念）：ubuntu、fedora、redhat、centos则是不同肤色的人。
+2）这个比较正确：linux这个词是指操作系统的内核，ubuntu是指基于这种内核的操作系统，就是在linux这个内核上又加上了一种界面系统，就像你看到的windows的界面一样。 Linux这个词本身只表示Linux内核，但实际上人们已经习惯了用Linux来形容整个基于Linux内核，并且使用GNU 工程各种工具和数据库的操作系统。     
+3）历史：linux与ubuntu的关系bai就像windows与windowsXP的关系相似，linux并不是一个实du际存在的操作系统，他只zhi是一个概念，怎么说呢，dao当世界上的第一个所谓的Linux被编写出来的时候，它的名字叫hobby，没有什么实际的应用价值，因为没有应用程序支持他，但后来被越来越多的人认识，开始使用，慢慢完善，出现了很多的版本像redhat，debian等，他们有着相同的性质和结构，只在具体的应用程序上有着千差万别，人们为了纪念最初编写那个叫做hobby的系统的天才程序员（那个人叫做linus，最初的那个叫做hobby的系统是从Unix上改编的，于是叫做linus's Unix，简称linux），于是给拥有相同性质和结构的操作系统取名叫做Linux，不管你的操作系统叫什么名字，只要遵循相同的性质于结构，那么就是linux大家庭中的一员，我们所说的ubuntu其实就是linux的一个版本，也有人说叫做“套件”。所谓套件顾名思义，就是有一套独特的应用程序组合的linux版本，ubuntu就是其中之一
+
+2.在Ubuntu下搭建C/C++编程环境，综合起来说就是 vim+gcc+gdb 。其中vim用于文本编辑，gcc用于程序编译，gdb用于代码调试。
+
+3.Vim：vim是从 vi 发展出来的一个文本编辑器。代码补全、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用，和Emacs并列成为类Unix系统用户最喜欢的文本编辑器。 vim的设计理念是命令的组合。用户学习了各种各样的文本间移动/跳转的命令和其他的普通模式的编辑命令，并且能够灵活组合使用的话，能够比那些没有模式的编辑器更加高效的进行文本编辑。同时VIM与很多快捷键设置和正则表达式类似,可以辅助记忆。并且vim针对程序员做了优化。、
+
+
+课设解答：
+1.输入sudo apt install build-essential遇到了没有可用的build-essential的问题
+解决方案：升级apt-get，使用命令sudo apt-get update ，然后在下载build-essential
+
+2.采用在UBUNTU上更友好的IDE编写codeblocks
+
+3.ppa：是Personal Package Archives首字母简写。翻译为中文意思是：个人软件包文档问题，因为我添加了源无法下载codeblocks，没有release文件
+sudo add-apt-repository ppa:damien-moore/codeblocks-stable添加源
+sudo apt-get update【命令解释】更新系统源
+sudo apt-get install codeblocks codeblocks-contrib【命令解释】安装软件
+但是在第一行命令出现了E：仓库没有release文件的情况。
+解决方法：命令cd /etc/apt/sources.list.d 进入文件夹后用ls列出所有文件
+查看是哪个没有release文件然后用以下命令：
+sudo mv damien-moore-ubuntu-codeblocks-stable-bionic.list damien-moore-ubuntu-codeblocks-stable-bionic.list.bak
+之后sudo apt-get update自动更新源然后再下载软件即可
+
+4.使用codeblocks编写c++语言需要在file->new->project->console application->c++，这里容易出现没有这个文件，no input file的问题，
+解决方法：编写的c++文件路径必须是全英文的，我存在了/home/kedou/c++
+
+5.使用touch创建新的txt文件
+

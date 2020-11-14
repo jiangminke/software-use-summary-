@@ -1,0 +1,5 @@
+1.MongoDB
+网上安装，然后使用师兄的可视化界面
+采用网页浏览时，在输入http://localhost:27017，需要在命令行点击回车才行
+启动mongoDB需要以管理员身份启动CMD net start mongoDB 输入 net stop mongodb 关闭服务
+在services.msc
